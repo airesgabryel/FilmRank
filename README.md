@@ -32,6 +32,7 @@ Este projeto foi construído com a base da web moderna, sem a necessidade de fra
 
 ## 🛠️ Como Executar
 
+- **Link Vercel** [clique aqui](https://avaliador-de-filmes.vercel.app/)
 
 1.  **Clone o repositório:**
     ```bash
