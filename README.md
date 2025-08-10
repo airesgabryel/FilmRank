@@ -30,6 +30,17 @@ Este projeto foi construído com a base da web moderna, sem a necessidade de fra
 
 ---
 
+## 📁 Estrutura de Pastas
+
+```
+AvaliadorDeFilmes/
+├── index.html
+├── style.css
+├── script.js
+└── README.md
+```
+
+
 ## 🛠️ Como Executar
 
 - **Link Vercel** [clique aqui](https://avaliador-de-filmes.vercel.app/)
