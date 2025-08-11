@@ -1,43 +1,58 @@
-/* Importa a fonte do Google Fonts */
+/* Importa a fonte 'Roboto Mono' do Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap');
 
-/* --- Tema Escuro Futurista (Padrão) --- */
+/* --- DEFINIÇÃO DAS VARIÁVEIS DE COR --- */
+
+/* Define as variáveis para o tema escuro (Dark Mode), que é o padrão */
 :root {
-    --cor-fundo: #0d1117; /* Um preto azulado, como o do GitHub Dark */
-    --cor-texto: #c9d1d9; /* Cinza claro, bom contraste */
-    --cor-destaque: #58a6ff; /* Azul brilhante */
+    --cor-fundo: #0d1117;
+    --cor-texto: #c9d1d9;
+    --cor-destaque: #bf77f6;
     --cor-card: #161b22;
-    --cor-sombra: rgba(88, 166, 255, 0.2);
+    --cor-sombra: rgba(191, 119, 246, 0.2);
     --cor-borda: #30363d;
-    --cor-botao-principal: #238636; /* Verde como em terminais de sucesso */
-    --cor-botao-principal-hover: #2ea043;
+    --cor-botao-principal: #8250df;
+    --cor-botao-principal-hover: #9e6cfd;
     --cor-botao-secundario: #21262d;
     --cor-botao-secundario-hover: #30363d;
 }
 
-/* --- Tema Claro Futurista --- */
+/* Define as variáveis para o tema claro (Light Mode) quando o body NÃO tem a classe .dark-mode */
 body:not(.dark-mode) {
-    --cor-fundo: #f0f4f8;
+    --cor-fundo: #f1f1f1; /* Novo fundo cinza claro */
     --cor-texto: #24292f;
     --cor-card: #ffffff;
-    --cor-sombra: rgba(0, 90, 224, 0.15);
+    --cor-destaque: #8250df;
+    --cor-sombra: rgba(130, 80, 223, 0.15);
     --cor-borda: #d0d7de;
-    --cor-destaque: #0969da;
-    --cor-botao-principal: #0969da;
-    --cor-botao-principal-hover: #0a7ee5;
+    --cor-botao-principal: #8250df;
+    --cor-botao-principal-hover: #9e6cfd;
     --cor-botao-secundario: #f6f8fa;
     --cor-botao-secundario-hover: #eef1f4;
+
+    h1 {
+        color: #000; /* Define a cor do texto para preto no tema claro */
+        -webkit-background-clip: initial; /* Remove o recorte do fundo */
+        background-clip: initial;         /* Remove o recorte do fundo */
+        background: none;                 /* Remove o gradiente de fundo */
+        text-shadow: none;                /* Remove a sombra (efeito neon) */
+        animation: none;                  /* Remove a animação de pulsação */
+    }
 }
 
-body { 
+/* --- ESTILOS GERAIS DA PÁGINA --- */
+
+body {
     font-family: 'Roboto Mono', monospace;
-    max-width: 900px; 
-    margin: auto; 
-    padding: 20px; 
-    background-color: var(--cor-fundo); 
+    max-width: 900px;
+    margin: auto;
+    padding: 20px;
+    background-color: var(--cor-fundo);
     color: var(--cor-texto);
     transition: background-color 0.3s, color 0.3s;
 }
+
+/* --- CABEÇALHO E TÍTULOS --- */
 
 header {
     position: relative;
@@ -47,12 +62,20 @@ header {
     margin-bottom: 20px;
 }
 
-h1 { 
-    color: var(--cor-texto); 
+h1 {
+    font-family: 'Roboto Mono', monospace;
+    font-size: 3em;
+    font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 2px;
-    font-size: 2em;
-    margin: 0;
+    letter-spacing: 4px;
+    margin: 0 0 10px 0;
+
+    background: linear-gradient(90deg, #c3c4d5, #ffffff, #c3c4d5);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+
+    animation: pulse-glow 4s ease-in-out infinite;
 }
 
 h2 {
@@ -60,6 +83,8 @@ h2 {
     border-bottom: 1px solid var(--cor-borda);
     padding-bottom: 10px;
     margin-top: 0;
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
 .theme-button {
@@ -80,6 +105,8 @@ h2 {
     border-color: var(--cor-destaque);
 }
 
+/* --- ESTILOS DOS CONTÊINERES PRINCIPAIS --- */
+
 .totais-container, .cadastro-container, .card-filme {
     background: var(--cor-card);
     padding: 20px;
@@ -94,28 +121,32 @@ h2 {
     box-shadow: 0 4px 15px var(--cor-sombra);
 }
 
-#lista-filmes { 
-    display: flex; 
-    flex-direction: column; 
-    gap: 20px; 
+/* --- LISTA DE FILMES E CARDS --- */
+
+#lista-filmes {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }
 
-.card-filme { 
-    display: flex; 
-    gap: 20px; 
+.card-filme {
+    display: flex;
+    gap: 20px;
     align-items: flex-start;
 }
 
-.card-filme img { 
-    width: 150px; 
-    height: 225px; 
-    object-fit: cover; 
-    border-radius: 4px; 
+.card-filme img {
+    width: 150px;
+    height: 225px;
+    object-fit: cover;
+    border-radius: 4px;
 }
 
-.card-filme .info { 
-    flex-grow: 1; 
+.card-filme .info {
+    flex-grow: 1;
 }
+
+/* --- SEÇÃO DE VOTAÇÃO --- */
 
 .votacao {
     margin-top: 15px;
@@ -123,8 +154,8 @@ h2 {
     border-top: 1px solid var(--cor-borda);
 }
 
-.votacao button { 
-    margin: 0 5px 5px 0; 
+.votacao button {
+    margin: 0 5px 5px 0;
     cursor: pointer;
     border: 1px solid var(--cor-borda);
     background-color: var(--cor-botao-secundario);
@@ -146,10 +177,12 @@ h2 {
     font-size: 1.1em;
 }
 
-#form-cadastro { 
-    display: flex; 
-    flex-direction: column; 
-    gap: 10px; 
+/* --- FORMULÁRIO DE CADASTRO --- */
+
+#form-cadastro {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 
 #form-cadastro input, #form-cadastro textarea {
@@ -183,6 +216,17 @@ h2 {
     background-color: var(--cor-botao-principal-hover);
 }
 
-hr { 
-    display: none; /* Não precisamos mais das linhas horizontais com este layout */
+hr {
+    display: none;
+}
+
+/* --- ANIMAÇÃO DO TÍTULO --- */
+
+@keyframes pulse-glow {
+    0%, 100% {
+        text-shadow: 0 0 5px rgba(255, 255, 255, 0.5), 0 0 10px var(--cor-sombra);
+    }
+    50% {
+        text-shadow: 0 0 10px rgba(255, 255, 255, 0.8), 0 0 25px var(--cor-sombra);
+    }
 }

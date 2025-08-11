@@ -1,9 +1,9 @@
-# 🎬 Simulador de Votação de Filmes
+# 🎬 ***FilmRank***
+## Simulador de Votação de Filmes
 
-Este projeto é uma aplicação web interativa que permite aos usuários votar em seus filmes favoritos, cadastrar novos títulos e visualizar os resultados em tempo real. A aplicação foi construída utilizando exclusivamente tecnologias front-end e salva os dados no navegador do usuário para garantir a persistência das informações.
+Este projeto é uma aplicação web interativa que permite aos usuários votar em seus filmes favoritos, cadastrar novos títulos e visualizar os resultados em tempo real.
 
 ---
-
 ## Principais Funcionalidades
 
 -   **Interface Moderna:** Design responsivo com tema dark/light.
@@ -20,17 +20,17 @@ Este projeto é uma aplicação web interativa que permite aos usuários votar e
 
 ---
 
-## 🚀 Tecnologias Utilizadas
-
-Este projeto foi construído com a base da web moderna, sem a necessidade de frameworks ou bibliotecas externas.
+## Tecnologias Utilizadas
 
 -   **HTML5:** Para a estrutura semântica do conteúdo.
 -   **CSS3:** Para estilização avançada, utilizando variáveis CSS para a funcionalidade de temas e um layout flexível.
 -   **JavaScript (ES6+):** Para toda a interatividade, manipulação do DOM e gerenciamento dos dados via `localStorage`.
 
+>Este projeto foi construído com a base da web moderna, sem a necessidade de frameworks ou bibliotecas externas.
+
 ---
 
-## 📁 Estrutura de Pastas
+## Estrutura de Pastas
 
 ```
 AvaliadorDeFilmes/
@@ -41,9 +41,11 @@ AvaliadorDeFilmes/
 ```
 
 
-## 🛠️ Como Executar
+## Como Executar:
 
-- **Link Vercel** [clique aqui](https://avaliador-de-filmes.vercel.app/)
+- Acesse o Link diretamente pelo [Vercel](https://avaliador-de-filmes.vercel.app/)
+
+Ou
 
 1.  **Clone o repositório:**
     ```bash
