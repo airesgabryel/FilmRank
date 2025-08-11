@@ -1,4 +1,7 @@
-// --- Lógica de Dados (localStorage) ---
+// --- Lógica de Dados (usando o localStorage do navegador) ---
+
+// Esta é a lista de filmes inicial. Ela só é usada na primeira vez que um usuário abre a página,
+// ou se o 'localStorage' estiver limpo. Funciona como um "banco de dados" padrão.
 const filmesIniciais = [
     { 
         id: 1, 
@@ -47,33 +50,59 @@ const filmesIniciais = [
     }
 ];
 
+// Função para buscar os dados. Ela tenta pegar do localStorage.
+// Se não encontrar nada, usa a lista inicial. Isso garante a persistência dos dados.
 function getDados() {
+    // Tenta pegar o item 'dados_votacao' do localStorage. Ele vem como uma string.
     const dadosString = localStorage.getItem('dados_votacao');
+    
+    // Se não houver dados salvos (primeira visita do usuário)...
     if (!dadosString) {
+        // ...salva a lista de filmes inicial no localStorage...
         salvarDados({ filmes: filmesIniciais });
+        // ...e retorna essa mesma lista.
         return { filmes: filmesIniciais };
     }
+    // Se encontrou dados, converte a string de volta para um objeto JavaScript e o retorna.
     return JSON.parse(dadosString);
 }
 
+// Função para salvar os dados no localStorage.
 function salvarDados(dados) {
+    // O localStorage só armazena texto (strings), então convertemos nosso objeto de dados para uma string no formato JSON.
     localStorage.setItem('dados_votacao', JSON.stringify(dados));
 }
 
-// --- Lógica da Aplicação (Votação, Cadastro, etc.) ---
+// --- Lógica da Aplicação (Votação, Cadastro, Renderização) ---
+
+// Função principal que lê os dados e desenha a lista de filmes na tela.
 function carregarFilmes() {
+    // Busca os dados mais recentes (do localStorage ou a lista inicial).
     const data = getDados();
     const filmes = data.filmes;
+    
+    // Pega a div no HTML que servirá de contêiner para a nossa lista.
     const listaFilmesDiv = document.getElementById('lista-filmes');
+    // Limpa a lista na tela antes de desenhá-la novamente. Essencial para evitar duplicatas.
     listaFilmesDiv.innerHTML = ''; 
+    
+    // Zera os contadores de totais gerais antes de recalcular.
     let totalGeralGostei = 0;
     let totalGeralNaoGostei = 0;
 
+    // Passa por cada filme da lista para criar seu card HTML.
     filmes.forEach(filme => {
+        // Soma os votos de cada filme aos totais gerais.
         totalGeralGostei += filme.gostei;
         totalGeralNaoGostei += filme.naoGostei;
+
+        // Cria um novo elemento <div> para o card do filme.
         const filmeDiv = document.createElement('div');
+        // Adiciona a classe 'card-filme' para aplicar o estilo do CSS.
         filmeDiv.className = 'card-filme';
+        
+        // Usa template literals (crases ``) para construir o HTML do card de forma mais fácil.
+        // Os valores de cada filme (como ${filme.titulo}) são inseridos dinamicamente.
         filmeDiv.innerHTML = `
             <img src="${filme.imagem}" alt="Pôster de ${filme.titulo}">
             <div class="info">
@@ -87,28 +116,46 @@ function carregarFilmes() {
                     <span>${filme.naoGostei}</span>
                 </div>
             </div>`;
+        
+        // Adiciona o novo card de filme criado à div principal na página.
         listaFilmesDiv.appendChild(filmeDiv);
     });
 
+    // Pega a div dos totais gerais no HTML.
     const totaisGeraisDiv = document.getElementById('totais-gerais');
+    // Atualiza o HTML dela com os totais calculados.
     totaisGeraisDiv.innerHTML = `<span><b>Total Gostei:</b> ${totalGeralGostei}</span> | <span><b>Total Não Gostei:</b> ${totalGeralNaoGostei}</span>`;
 }
 
+// Função para registrar um voto, chamada pelo 'onclick' dos botões.
 function votar(filmeId, tipoVoto) {
+    // Pega todos os dados atuais.
     const dados = getDados();
+    // Encontra na lista o filme específico que foi clicado, usando o ID.
     const filme = dados.filmes.find(f => f.id === filmeId);
+
+    // Se o filme foi encontrado...
     if (filme) {
+        // ...incrementa o contador de 'gostei' ou 'naoGostei' daquele filme.
         filme[tipoVoto]++;
+        // Salva a lista de filmes atualizada no localStorage.
         salvarDados(dados);
+        // Recarrega a lista na tela para mostrar o voto atualizado.
         carregarFilmes();
     }
 }
 
+// Adiciona um "ouvinte" ao formulário de cadastro, que será acionado no evento 'submit' (clique no botão Cadastrar).
 document.getElementById('form-cadastro').addEventListener('submit', (event) => {
+    // Impede o comportamento padrão do formulário, que é recarregar a página.
     event.preventDefault(); 
+    
+    // Pega os dados atuais.
     const dados = getDados();
+    
+    // Cria um novo objeto de filme com os valores digitados nos campos do formulário.
     const novoFilme = {
-        id: Date.now(),
+        id: Date.now(), // Gera um ID único baseado no tempo atual em milissegundos.
         titulo: document.getElementById('titulo').value,
         genero: document.getElementById('genero').value,
         imagem: document.getElementById('imagem').value,
@@ -116,36 +163,58 @@ document.getElementById('form-cadastro').addEventListener('submit', (event) => {
         gostei: 0,
         naoGostei: 0
     };
+
+    // Adiciona o novo filme ao final da lista de filmes.
     dados.filmes.push(novoFilme);
+    // Salva a lista atualizada com o novo filme.
     salvarDados(dados);
+
+    // Limpa os campos do formulário.
     document.getElementById('form-cadastro').reset(); 
+    // Recarrega a lista de filmes na tela para mostrar o novo item.
     carregarFilmes(); 
 });
 
 // --- Lógica de Tema Dark/Light ---
+
+// Pega as referências dos elementos HTML que vamos manipular.
 const themeToggleButton = document.getElementById('theme-toggle');
 const body = document.body;
 
+// Função que aplica o tema visualmente.
 function applyTheme(theme) {
+    // Se o tema for 'dark'...
     if (theme === 'dark') {
+        // ...adiciona a classe 'dark-mode' ao body. O CSS fará o resto.
         body.classList.add('dark-mode');
+        // Atualiza o texto do botão.
         themeToggleButton.textContent = '☀️ Alternar Tema';
-    } else {
+    } else { // Senão (se for 'light')...
+        // ...remove a classe 'dark-mode' do body.
         body.classList.remove('dark-mode');
+        // Atualiza o texto do botão.
         themeToggleButton.textContent = '🌙 Alternar Tema';
     }
 }
 
+// Adiciona um "ouvinte" de clique ao botão de tema.
 themeToggleButton.addEventListener('click', () => {
+    // Verifica se o tema atual é dark. Se for, o novo tema será 'light'. Senão, será 'dark'.
     const newTheme = body.classList.contains('dark-mode') ? 'light' : 'dark';
+    // Salva a nova escolha do usuário no localStorage para ser lembrada.
     localStorage.setItem('theme', newTheme);
-
+    // Aplica o novo tema visualmente na página.
     applyTheme(newTheme);
 });
 
 // --- Lógica que roda quando a página carrega ---
+
+// Adiciona um "ouvinte" ao documento que espera o HTML ser completamente carregado para então executar o código.
 document.addEventListener('DOMContentLoaded', () => {
+    // Pega o tema salvo no localStorage. Se não houver nada salvo, usa 'dark' como padrão.
     const savedTheme = localStorage.getItem('theme') || 'dark'; 
+    // Aplica o tema (salvo ou o padrão) assim que a página carrega.
     applyTheme(savedTheme);
+    // Carrega e desenha a lista de filmes na tela.
     carregarFilmes();
 });

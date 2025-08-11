@@ -1,25 +1,28 @@
-/* Importa a fonte 'Roboto Mono' do Google Fonts */
+/* Importa a fonte 'Roboto Mono' do Google Fonts para ser usada no projeto todo */
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap');
 
-/* --- DEFINIÇÃO DAS VARIÁVEIS DE COR --- */
+/* --- DEFINIÇÃO DAS VARIÁVEIS DE COR ---
+  Usar variáveis torna a manutenção e a troca de temas muito mais fácil.
+  Basta mudar o valor da variável aqui para alterar a cor em todo o site.
+*/
 
 /* Define as variáveis para o tema escuro (Dark Mode), que é o padrão */
 :root {
-    --cor-fundo: #0d1117;
-    --cor-texto: #c9d1d9;
-    --cor-destaque: #bf77f6;
-    --cor-card: #161b22;
-    --cor-sombra: rgba(191, 119, 246, 0.2);
-    --cor-borda: #30363d;
-    --cor-botao-principal: #8250df;
-    --cor-botao-principal-hover: #9e6cfd;
-    --cor-botao-secundario: #21262d;
-    --cor-botao-secundario-hover: #30363d;
+    --cor-fundo: #0d1117;                   /* Cor de fundo principal (preto azulado) */
+    --cor-texto: #c9d1d9;                   /* Cor principal do texto (cinza claro) */
+    --cor-destaque: #bf77f6;                /* Cor de destaque para elementos importantes (roxo) */
+    --cor-card: #161b22;                    /* Cor de fundo para os "cards" e contêineres */
+    --cor-sombra: rgba(191, 119, 246, 0.2); /* Cor da sombra e brilhos (roxo com transparência) */
+    --cor-borda: #30363d;                   /* Cor das bordas e divisórias */
+    --cor-botao-principal: #8250df;         /* Cor do botão de ação principal (ex: Cadastrar) */
+    --cor-botao-principal-hover: #9e6cfd;   /* Cor do botão principal ao passar o mouse */
+    --cor-botao-secundario: #21262d;        /* Cor de botões com menor destaque */
+    --cor-botao-secundario-hover: #30363d;  /* Cor dos botões secundários ao passar o mouse */
 }
 
 /* Define as variáveis para o tema claro (Light Mode) quando o body NÃO tem a classe .dark-mode */
 body:not(.dark-mode) {
-    --cor-fundo: #f1f1f1; /* Novo fundo cinza claro */
+    --cor-fundo: #f1f1f1;                   /* Fundo cinza claro para o tema light */
     --cor-texto: #24292f;
     --cor-card: #ffffff;
     --cor-destaque: #8250df;
@@ -30,32 +33,33 @@ body:not(.dark-mode) {
     --cor-botao-secundario: #f6f8fa;
     --cor-botao-secundario-hover: #eef1f4;
 
+    /* Sobrescreve o estilo do h1 APENAS no tema claro para garantir a legibilidade */
     h1 {
-        color: #000; /* Define a cor do texto para preto no tema claro */
-        -webkit-background-clip: initial; /* Remove o recorte do fundo */
-        background-clip: initial;         /* Remove o recorte do fundo */
-        background: none;                 /* Remove o gradiente de fundo */
-        text-shadow: none;                /* Remove a sombra (efeito neon) */
-        animation: none;                  /* Remove a animação de pulsação */
+        color: #1f1f1f;                       /* Define a cor do texto para preto no tema claro */
+        -webkit-background-clip: initial;   /* Remove o recorte do fundo */
+        background-clip: initial;           /* Remove o recorte do fundo */
+        background: none;                   /* Remove o gradiente de fundo */
+        text-shadow: none;                  /* Remove a sombra (efeito neon) */
+        animation: none;                    /* Remove a animação de pulsação */
     }
 }
 
 /* --- ESTILOS GERAIS DA PÁGINA --- */
 
-body {
-    font-family: 'Roboto Mono', monospace;
-    max-width: 900px;
-    margin: auto;
-    padding: 20px;
-    background-color: var(--cor-fundo);
-    color: var(--cor-texto);
-    transition: background-color 0.3s, color 0.3s;
+body { 
+    font-family: 'Roboto Mono', monospace; /* Aplica a fonte importada */
+    max-width: 900px;                      /* Define uma largura máxima para o conteúdo */
+    margin: auto;                          /* Centraliza o conteúdo na tela */
+    padding: 20px;                         /* Adiciona um espaçamento interno */
+    background-color: var(--cor-fundo);    /* Usa a variável de cor para o fundo */
+    color: var(--cor-texto);               /* Usa a variável de cor para o texto */
+    transition: background-color 0.3s, color 0.3s; /* Animação suave na troca de tema */
 }
 
 /* --- CABEÇALHO E TÍTULOS --- */
 
 header {
-    position: relative;
+    position: relative; /* Permite posicionar o botão de tema em relação ao cabeçalho */
     text-align: center;
     border-bottom: 1px solid var(--cor-borda);
     padding-bottom: 20px;
@@ -63,19 +67,20 @@ header {
 }
 
 h1 {
-    font-family: 'Roboto Mono', monospace;
-    font-size: 3em;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 4px;
-    margin: 0 0 10px 0;
-
-    background: linear-gradient(90deg, #c3c4d5, #ffffff, #c3c4d5);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-
-    animation: pulse-glow 4s ease-in-out infinite;
+    font-size: 3em;                     /* Tamanho grande para o título principal */
+    font-weight: 700;                   /* Deixa a fonte em negrito */
+    text-transform: uppercase;          /* Transforma o texto para maiúsculas */
+    letter-spacing: 4px;                /* Aumenta o espaçamento entre as letras */
+    margin: 0 0 10px 0;                 /* Define as margens */
+    
+    /* Efeito de Gradiente no Texto (só funciona no tema escuro devido à regra acima) */
+    background: linear-gradient(90deg, #c3c4d5, #ffffff, #c3c4d5); /* O gradiente em si */
+    -webkit-background-clip: text;      /* Recorta o fundo para o formato do texto (compatibilidade) */
+    background-clip: text;              /* Recorta o fundo para o formato do texto */
+    color: transparent;                 /* Deixa a cor do texto transparente para o fundo aparecer */
+    
+    /* Aplica a animação de brilho pulsante */
+    animation: pulse-glow 4s ease-in-out infinite; /* nome, duração, ritmo, repetição */
 }
 
 h2 {
@@ -88,16 +93,16 @@ h2 {
 }
 
 .theme-button {
-    position: absolute;
-    top: 0;
-    right: 0;
+    position: absolute; /* Posiciona o botão flutuando sobre o header */
+    top: 0;             /* Alinha no topo */
+    right: 0;           /* Alinha à direita */
     padding: 8px 12px;
     border-radius: 6px;
     border: 1px solid var(--cor-borda);
     background-color: var(--cor-botao-secundario);
     color: var(--cor-texto);
-    cursor: pointer;
-    transition: all 0.2s ease-in-out;
+    cursor: pointer; /* Muda o cursor para uma "mãozinha" */
+    transition: all 0.2s ease-in-out; /* Animação suave para todas as propriedades */
     font-family: 'Roboto Mono', monospace;
 }
 .theme-button:hover {
@@ -107,6 +112,7 @@ h2 {
 
 /* --- ESTILOS DOS CONTÊINERES PRINCIPAIS --- */
 
+/* Estilo compartilhado para os contêineres e cards */
 .totais-container, .cadastro-container, .card-filme {
     background: var(--cor-card);
     padding: 20px;
@@ -115,35 +121,37 @@ h2 {
     margin-bottom: 20px;
     transition: all 0.2s ease-in-out;
 }
+
+/* Efeito de "levantar" o card ao passar o mouse */
 .card-filme:hover {
-    transform: translateY(-3px);
+    transform: translateY(-3px); /* Move o card 3 pixels para cima */
     border-color: var(--cor-destaque);
-    box-shadow: 0 4px 15px var(--cor-sombra);
+    box-shadow: 0 4px 15px var(--cor-sombra); /* Aumenta a sombra para dar profundidade */
 }
 
 /* --- LISTA DE FILMES E CARDS --- */
 
-#lista-filmes {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
+#lista-filmes { 
+    display: flex;             /* Habilita o Flexbox */
+    flex-direction: column;    /* Organiza os itens em uma coluna */
+    gap: 20px;                 /* Espaçamento entre os cards */
 }
 
-.card-filme {
-    display: flex;
-    gap: 20px;
-    align-items: flex-start;
+.card-filme { 
+    display: flex;             /* Habilita o Flexbox para alinhar imagem e info lado a lado */
+    gap: 20px;                 /* Espaçamento entre a imagem e o bloco de informações */
+    align-items: flex-start;   /* Alinha os itens no topo */
 }
 
-.card-filme img {
-    width: 150px;
-    height: 225px;
-    object-fit: cover;
-    border-radius: 4px;
+.card-filme img { 
+    width: 150px; 
+    height: 225px; 
+    object-fit: cover;         /* Garante que a imagem cubra a área sem distorcer */
+    border-radius: 4px; 
 }
 
-.card-filme .info {
-    flex-grow: 1;
+.card-filme .info { 
+    flex-grow: 1;              /* Faz o bloco de informações ocupar todo o espaço restante */
 }
 
 /* --- SEÇÃO DE VOTAÇÃO --- */
@@ -151,16 +159,16 @@ h2 {
 .votacao {
     margin-top: 15px;
     padding-top: 15px;
-    border-top: 1px solid var(--cor-borda);
+    border-top: 1px solid var(--cor-borda); /* Linha divisória */
 }
 
-.votacao button {
-    margin: 0 5px 5px 0;
+.votacao button { 
+    margin: 0 5px 5px 0; 
     cursor: pointer;
     border: 1px solid var(--cor-borda);
     background-color: var(--cor-botao-secundario);
     padding: 8px 12px;
-    border-radius: 20px;
+    border-radius: 20px; /* Deixa os botões de voto arredondados */
     color: var(--cor-texto);
     font-family: 'Roboto Mono', monospace;
     transition: all 0.2s ease-in-out;
@@ -170,19 +178,20 @@ h2 {
     color: var(--cor-destaque);
 }
 
+/* Estilo para os números da votação */
 .votacao span {
     font-weight: bold;
     margin: 0 10px 0 5px;
-    color: var(--cor-destaque);
+    color: var(--cor-destaque); /* Cor de destaque para os números */
     font-size: 1.1em;
 }
 
 /* --- FORMULÁRIO DE CADASTRO --- */
 
-#form-cadastro {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+#form-cadastro { 
+    display: flex; 
+    flex-direction: column; 
+    gap: 10px; 
 }
 
 #form-cadastro input, #form-cadastro textarea {
@@ -194,8 +203,10 @@ h2 {
     color: var(--cor-texto);
     font-family: 'Roboto Mono', monospace;
 }
+
+/* Efeito de destaque quando o usuário clica em um campo do formulário */
 #form-cadastro input:focus, #form-cadastro textarea:focus {
-    outline: none;
+    outline: none; /* Remove a borda padrão do navegador */
     border-color: var(--cor-destaque);
     box-shadow: 0 0 0 3px var(--cor-sombra);
 }
@@ -216,16 +227,19 @@ h2 {
     background-color: var(--cor-botao-principal-hover);
 }
 
-hr {
-    display: none;
+hr { 
+    display: none; /* Esconde as linhas <hr> que não são mais necessárias com o novo design */
 }
 
 /* --- ANIMAÇÃO DO TÍTULO --- */
 
+/* Define a animação chamada 'pulse-glow' */
 @keyframes pulse-glow {
+    /* Estado inicial (0%) e final (100%) da animação */
     0%, 100% {
         text-shadow: 0 0 5px rgba(255, 255, 255, 0.5), 0 0 10px var(--cor-sombra);
     }
+    /* Estado intermediário (metade da animação) */
     50% {
         text-shadow: 0 0 10px rgba(255, 255, 255, 0.8), 0 0 25px var(--cor-sombra);
     }
