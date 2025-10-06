@@ -1,7 +1,7 @@
 # 🎬 ***FilmRank***
 ## Simulador de Votação de Filmes
 
-Este projeto é uma aplicação web interativa que permite aos usuários votar em seus filmes favoritos, cadastrar novos títulos e visualizar os resultados em tempo real.
+Aplicação web interativa que permite aos usuários votar em seus filmes favoritos, cadastrar novos títulos e visualizar os resultados em tempo real.
 
 ---
 ## Principais Funcionalidades
