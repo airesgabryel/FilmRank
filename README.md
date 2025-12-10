@@ -4,6 +4,7 @@
 Aplicação web interativa que permite aos usuários votar em seus filmes favoritos, cadastrar novos títulos e visualizar os resultados em tempo real.
 
 ---
+
 ## Principais Funcionalidades
 
 -   **Interface Moderna:** Design responsivo com tema dark/light.
